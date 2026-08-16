@@ -1,378 +1,164 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tools von Lukas Jordi</title>
-<meta name="description" content="Gesammelte Browser-Werkzeuge, Karten und Unterrichtsmaterialien - alle ohne Installation direkt im Browser nutzbar.">
+<title>Tools</title>
+<meta name="robots" content="noindex">
 <meta name="color-scheme" content="light dark">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400&display=swap">
 <style>
   :root {
     --grund: #ffffff;
-    --flaeche: #f4f5f7;
-    --rand: #d8dbe0;
-    --schrift: #1a1d21;
-    --gedaempft: #55595f;
+    --rand: #e2e4e8;
+    --schrift: #22262b;
+    --gedaempft: #62666d;
     --akzent: #0b5d8f;
-    --akzent-flaeche: #e7f0f7;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --grund: #14161a;
-      --flaeche: #1d2026;
-      --rand: #333841;
-      --schrift: #eceef1;
-      --gedaempft: #a7adb6;
-      --akzent: #7cc4f0;
-      --akzent-flaeche: #1b2b38;
+      --grund: #15171b;
+      --rand: #2c3038;
+      --schrift: #e6e8eb;
+      --gedaempft: #9ba1a9;
+      --akzent: #79c1ef;
     }
   }
   * { box-sizing: border-box; }
   body {
-    margin: 0;
-    padding: 0 1.25rem 5rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 4rem;
+    max-width: 44rem;
     background: var(--grund);
     color: var(--schrift);
     font-family: "Source Sans 3", system-ui, -apple-system, sans-serif;
-    font-size: 1.0625rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.55;
   }
-  .huelle { max-width: 60rem; margin: 0 auto; }
-  header { padding: 3.5rem 0 1.5rem; }
-  h1 { font-size: clamp(1.9rem, 5vw, 2.6rem); line-height: 1.15; margin: 0 0 .6rem; }
-  .anriss { font-size: 1.15rem; color: var(--gedaempft); margin: 0 0 1.75rem; max-width: 44rem; }
-  .suche {
-    width: 100%;
-    max-width: 26rem;
-    padding: .65rem .9rem;
-    font: inherit;
-    color: inherit;
-    background: var(--flaeche);
-    border: 1px solid var(--rand);
-    border-radius: .5rem;
+  h1, h2 { font-weight: 400; }
+  h1 {
+    font-size: 1rem;
+    color: var(--gedaempft);
+    margin: 0 0 1.25rem;
   }
-  .suche::placeholder { color: var(--gedaempft); }
-  .gruppe { margin: 3rem 0 0; }
-  .gruppe h2 { font-size: 1.4rem; margin: 0 0 .25rem; }
-  .gruppe-text { color: var(--gedaempft); margin: 0 0 1.25rem; }
-  .raster {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  h2 {
+    font-size: .95rem;
+    color: var(--gedaempft);
+    margin: 2.25rem 0 .5rem;
+    padding-bottom: .3rem;
+    border-bottom: 1px solid var(--rand);
   }
-  .karte {
-    display: flex;
-    flex-direction: column;
-    background: var(--flaeche);
-    border: 1px solid var(--rand);
-    border-radius: .75rem;
-    overflow: hidden;
-  }
-  .karte-link {
-    display: block;
-    flex: 1;
-    padding: 1.1rem 1.2rem .4rem;
-    color: inherit;
-    text-decoration: none;
-  }
-  .karte-link:hover, .karte-link:focus-visible { background: var(--akzent-flaeche); }
-  .karte-link h3 {
-    margin: 0 0 .35rem;
-    font-size: 1.12rem;
+  section:first-of-type h2 { margin-top: 1.5rem; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li { padding: .22rem 0; }
+  li a {
     color: var(--akzent);
     text-decoration: underline;
     text-underline-offset: 2px;
   }
-  .karte-link p { margin: 0; color: var(--gedaempft); font-size: .97rem; line-height: 1.5; }
-  .meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .75rem;
-    justify-content: space-between;
-    margin: 0;
-    padding: .6rem 1.2rem 1rem;
-    font-size: .85rem;
+  li span {
     color: var(--gedaempft);
+    font-size: .9rem;
   }
-  .meta a { color: var(--gedaempft); }
+  .suche {
+    width: 100%;
+    max-width: 18rem;
+    padding: .4rem .6rem;
+    font: inherit;
+    font-size: .95rem;
+    color: inherit;
+    background: transparent;
+    border: 1px solid var(--rand);
+    border-radius: .35rem;
+  }
+  .suche::placeholder { color: var(--gedaempft); }
   a:focus-visible, .suche:focus-visible {
-    outline: 3px solid var(--akzent);
+    outline: 2px solid var(--akzent);
     outline-offset: 2px;
   }
-  .leer { color: var(--gedaempft); margin: 2rem 0; }
+  #leer { color: var(--gedaempft); margin: 1.5rem 0; }
   footer {
-    margin-top: 4rem;
-    padding-top: 1.5rem;
+    margin-top: 3rem;
+    padding-top: 1rem;
     border-top: 1px solid var(--rand);
     color: var(--gedaempft);
-    font-size: .92rem;
+    font-size: .85rem;
   }
+  footer a { color: var(--gedaempft); }
   [hidden] { display: none !important; }
 </style>
 
-<div class="huelle">
-  <header>
-    <h1>Tools von Lukas Jordi</h1>
-    <p class="anriss">Kleine Werkzeuge, Karten und Unterrichtsmaterialien - alle laufen direkt im Browser, ohne Installation und ohne Konto. Die Liste erzeugt sich selbst aus meinen 20 veröffentlichten Projekten.</p>
-    <label for="suche" class="visuell-versteckt" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Tools durchsuchen</label>
-    <input id="suche" class="suche" type="search" placeholder="Tools durchsuchen …" autocomplete="off">
-  </header>
+<h1>Tools</h1>
 
-  <main>
-      <section class="gruppe" id="unterricht-und-lehrplan" data-gruppe>
+<label for="suche" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Suchen</label>
+<input id="suche" class="suche" type="search" placeholder="Suchen …" autocomplete="off">
+
+<main>
+      <section data-gruppe>
         <h2>Unterricht und Lehrplan</h2>
-        <p class="gruppe-text">Werkzeuge rund um TTG, Lehrplan 21 und die Planung von Unterricht.</p>
-        <ul class="raster">
-        <li class="karte">
-          <a class="karte-link" href="https://ljuokr.github.io/ttg-lehrplan/">
-            <h3>TTG im Lehrplan 21</h3>
-            <p>Interaktive Struktur des Lehrplans 21 fuer Textiles und Technisches Gestalten (TTG, Kanton Luzern): Kompetenzbereiche, Zyklusansicht, Querverweise. Ohne Gewaehr - massgebend ist der offizielle Lehrplan (lu.lehrplan.ch).</p>
-          </a>
-          <p class="meta">
-            <span>Aktualisiert 16. Juni 2026</span>
-            <a href="https://github.com/ljuokr/ttg-lehrplan">Quellcode</a>
-          </p>
-        </li>
-        <li class="karte">
-          <a class="karte-link" href="https://ljuokr.github.io/planungstool-ttg/">
-            <h3>Planungstool TTG</h3>
-            <p>Planungstool TTG: Modell Makroplanung für die Planung eines Unterrichtsvorhabens im Textilen und Technischen Gestalten.</p>
-          </a>
-          <p class="meta">
-            <span>Aktualisiert 02. August 2026</span>
-            <a href="https://github.com/ljuokr/planungstool-ttg">Quellcode</a>
-          </p>
-        </li>
-        <li class="karte">
-          <a class="karte-link" href="https://ljuokr.github.io/wortwolke-designprozess/">
-            <h3>Wortwolke Designprozess</h3>
-            <p>Begriffswolke zu den fünf Phasen des Designprozesses im TTG.</p>
-          </a>
-          <p class="meta">
-            <span>Aktualisiert 21. Juni 2026</span>
-            <a href="https://github.com/ljuokr/wortwolke-designprozess">Quellcode</a>
-          </p>
-        </li>
-        <li class="karte">
-          <a class="karte-link" href="https://ljuokr.github.io/kalender/">
-            <h3>PHBern-Raumkalender</h3>
-            <p>Persönlicher Lese-Helfer für den PHBern-Raumkalender. Experimentell, ohne Gewähr — im Zweifel gilt der offizielle Kalender (Quelle: apps.phbern.ch/raumkalender).</p>
-          </a>
-          <p class="meta">
-            <span>Aktualisiert 16. August 2026</span>
-            <a href="https://github.com/ljuokr/kalender">Quellcode</a>
-          </p>
-        </li>
+        <ul>
+          <li><a href="https://ljuokr.github.io/ttg-lehrplan/">TTG im Lehrplan 21</a> <span>Kompetenzbereiche, Zyklusansicht und Querverweise</span></li>
+          <li><a href="https://ljuokr.github.io/planungstool-ttg/">Planungstool TTG</a> <span>Modell Makroplanung für ein Unterrichtsvorhaben</span></li>
+          <li><a href="https://ljuokr.github.io/wortwolke-designprozess/">Wortwolke Designprozess</a> <span>Begriffe zu den fünf Phasen des Designprozesses</span></li>
+          <li><a href="https://ljuokr.github.io/kalender/">PHBern-Raumkalender</a> <span>Lese-Helfer für den PHBern-Raumkalender</span></li>
         </ul>
       </section>
-      <section class="gruppe" id="gestalten-und-produzieren" data-gruppe>
+      <section data-gruppe>
         <h2>Gestalten und Produzieren</h2>
-        <p class="gruppe-text">Browser-Apps für Vektoren, Stickdaten, Laser und 3D-Druck.</p>
-        <ul class="raster">
-        <li class="karte">
-          <a class="karte-link" href="https://vektortool.app">
-            <h3>Vektortool</h3>
-            <p>Free browser-based vector editor: draw, trace images, embroider (DST/PES), 3D-print and laser templates. No install, no login. From vector to object.</p>
-          </a>
-          <p class="meta">
-            <span>Aktualisiert 10. Juli 2026</span>
-            <a href="https://github.com/ljuokr/vektortool">Quellcode</a>
-          </p>
-        </li>
-        <li class="karte">
-          <a class="karte-link" href="https://ljuokr.github.io/stitchpath/">
-            <h3>StitchPath</h3>
-            <p>Browser-basierter Stickdaten-Editor (DST). Single-File-HTML-App mit Text-Werkzeug, Multi-Touch, Auto-Glättung und Maschinenausgabe.</p>
-          </a>
-          <p class="meta">
-            <span>Aktualisiert 19. Mai 2026</span>
-            <a href="https://github.com/ljuokr/stitchpath">Quellcode</a>
-          </p>
-        </li>
-        <li class="karte">
-          <a class="karte-link" href="https://ljuokr.github.io/pix/">
-            <h3>NeoPixel-Matrix</h3>
-            
-          </a>
-          <p class="meta">
-            <span>Aktualisiert 28. November 2025</span>
-            <a href="https://github.com/ljuokr/pix">Quellcode</a>
-          </p>
-        </li>
+        <ul>
+          <li><a href="https://vektortool.app">Vektortool</a> <span>Vektoreditor mit Stick-, Laser- und 3D-Ausgabe</span></li>
+          <li><a href="https://ljuokr.github.io/stitchpath/">StitchPath</a> <span>Stickdaten-Editor für DST</span></li>
+          <li><a href="https://ljuokr.github.io/pix/">NeoPixel-Matrix</a> <span>NeoPixel-Matrix zeichnen und umwandeln</span></li>
         </ul>
       </section>
-      <section class="gruppe" id="reisen-und-stadtkarten" data-gruppe>
+      <section data-gruppe>
         <h2>Reisen und Stadtkarten</h2>
-        <p class="gruppe-text">Persönliche Leaflet-Karten und Reiseunterlagen.</p>
-        <ul class="raster">
-        <li class="karte">
-          <a class="karte-link" href="https://ljuokr.github.io/mexico-city-karte/">
-            <h3>Mexico-City · Meine Karte</h3>
-            <p>Persönliche Mexico-City-Reisekarte (Leaflet, Single-File)</p>
-          </a>
-          <p class="meta">
-            <span>Aktualisiert 14. August 2026</span>
-            <a href="https://github.com/ljuokr/mexico-city-karte">Quellcode</a>
-          </p>
-        </li>
-        <li class="karte">
-          <a class="karte-link" href="https://ljuokr.github.io/mexiko-juli-karte/">
-            <h3>Mexiko im Juli · Ideen-Karte</h3>
-            <p>Ideen-Karte Mexiko im Juli/August: Leaflet-Single-File mit EDA-Risikozonen, Saison-Infos und Sport-Spots</p>
-          </a>
-          <p class="meta">
-            <span>Aktualisiert 26. Juli 2026</span>
-            <a href="https://github.com/ljuokr/mexiko-juli-karte">Quellcode</a>
-          </p>
-        </li>
-        <li class="karte">
-          <a class="karte-link" href="https://ljuokr.github.io/stockholm-karte/">
-            <h3>Stockholm · Meine Karte</h3>
-            <p>Persönliche Stockholm-Karte (Leaflet, Single-File)</p>
-          </a>
-          <p class="meta">
-            <span>Aktualisiert 14. August 2026</span>
-            <a href="https://github.com/ljuokr/stockholm-karte">Quellcode</a>
-          </p>
-        </li>
-        <li class="karte">
-          <a class="karte-link" href="https://ljuokr.github.io/oslo-karte/">
-            <h3>Oslo · Meine Karte</h3>
-            <p>Persönliche Oslo-Karte (Leaflet, Single-File)</p>
-          </a>
-          <p class="meta">
-            <span>Aktualisiert 14. August 2026</span>
-            <a href="https://github.com/ljuokr/oslo-karte">Quellcode</a>
-          </p>
-        </li>
-        <li class="karte">
-          <a class="karte-link" href="https://ljuokr.github.io/tallinn-karte/">
-            <h3>Tallinn · Meine Karte</h3>
-            <p>Persönliche Tallinn-Karte (Leaflet, Single-File)</p>
-          </a>
-          <p class="meta">
-            <span>Aktualisiert 14. August 2026</span>
-            <a href="https://github.com/ljuokr/tallinn-karte">Quellcode</a>
-          </p>
-        </li>
-        <li class="karte">
-          <a class="karte-link" href="https://ljuokr.github.io/toronto-karte/">
-            <h3>Toronto · Meine Karte</h3>
-            <p>Persönliche Toronto-Karte (Leaflet, Single-File).</p>
-          </a>
-          <p class="meta">
-            <span>Aktualisiert 10. Juli 2026</span>
-            <a href="https://github.com/ljuokr/toronto-karte">Quellcode</a>
-          </p>
-        </li>
-        <li class="karte">
-          <a class="karte-link" href="https://ljuokr.github.io/vancouver-karte/">
-            <h3>Vancouver · Meine Karte</h3>
-            <p>Persönliche Vancouver-Karte (Leaflet, Single-File).</p>
-          </a>
-          <p class="meta">
-            <span>Aktualisiert 13. Juli 2026</span>
-            <a href="https://github.com/ljuokr/vancouver-karte">Quellcode</a>
-          </p>
-        </li>
-        <li class="karte">
-          <a class="karte-link" href="https://ljuokr.github.io/vancouver-calgary-route/">
-            <h3>Vancouver → Calgary · Roadtrip</h3>
-            <p>Roadtrip Vancouver nach Calgary mit Etappen und Stopps.</p>
-          </a>
-          <p class="meta">
-            <span>Aktualisiert 17. Juli 2026</span>
-            <a href="https://github.com/ljuokr/vancouver-calgary-route">Quellcode</a>
-          </p>
-        </li>
-        <li class="karte">
-          <a class="karte-link" href="https://ljuokr.github.io/leipzig-bericht/">
-            <h3>Studienreise Leipzig</h3>
-            <p>Bericht zur Studienreise der SGL AG Design und Technik.</p>
-          </a>
-          <p class="meta">
-            <span>Aktualisiert 10. August 2026</span>
-            <a href="https://github.com/ljuokr/leipzig-bericht">Quellcode</a>
-          </p>
-        </li>
+        <ul>
+          <li><a href="https://ljuokr.github.io/mexico-city-karte/">Mexico City</a> <span>Leaflet-Karte, Single-File</span></li>
+          <li><a href="https://ljuokr.github.io/mexiko-juli-karte/">Mexiko im Juli</a> <span>Risikozonen, Saison und Sport-Spots</span></li>
+          <li><a href="https://ljuokr.github.io/stockholm-karte/">Stockholm</a> <span>Leaflet-Karte mit Secondhand und Botanik</span></li>
+          <li><a href="https://ljuokr.github.io/oslo-karte/">Oslo</a> <span>Leaflet-Karte, Single-File</span></li>
+          <li><a href="https://ljuokr.github.io/tallinn-karte/">Tallinn</a> <span>Leaflet-Karte, Single-File</span></li>
+          <li><a href="https://ljuokr.github.io/toronto-karte/">Toronto</a> <span>Leaflet-Karte, Single-File</span></li>
+          <li><a href="https://ljuokr.github.io/vancouver-karte/">Vancouver</a> <span>Leaflet-Karte, Single-File</span></li>
+          <li><a href="https://ljuokr.github.io/vancouver-calgary-route/">Vancouver nach Calgary</a> <span>Roadtrip mit Etappen und Stopps</span></li>
+          <li><a href="https://ljuokr.github.io/leipzig-bericht/">Studienreise Leipzig</a> <span>Bericht der SGL AG Design und Technik</span></li>
         </ul>
       </section>
-      <section class="gruppe" id="draussen-unterwegs" data-gruppe>
+      <section data-gruppe>
         <h2>Draussen unterwegs</h2>
-        <p class="gruppe-text">Touren, Pässe und Pässe-Logistik.</p>
-        <ul class="raster">
-        <li class="karte">
-          <a class="karte-link" href="https://ljuokr.github.io/gravel-paesse-zuerich/">
-            <h3>Gravel-Pässe ab Zürich · ~60 km / ~1200 Hm</h3>
-            <p>Gravel-Pässe ab Zürich – Übersicht ~60 km / ~1200 Hm</p>
-          </a>
-          <p class="meta">
-            <span>Aktualisiert 22. Mai 2026</span>
-            <a href="https://github.com/ljuokr/gravel-paesse-zuerich">Quellcode</a>
-          </p>
-        </li>
-        <li class="karte">
-          <a class="karte-link" href="https://ljuokr.github.io/indian-arm-kajak/">
-            <h3>Indian Arm · Seekajak-Karte</h3>
-            <p>Seekajak-Karte für den Indian Arm bei Vancouver.</p>
-          </a>
-          <p class="meta">
-            <span>Aktualisiert 14. Juli 2026</span>
-            <a href="https://github.com/ljuokr/indian-arm-kajak">Quellcode</a>
-          </p>
-        </li>
-        <li class="karte">
-          <a class="karte-link" href="https://ljuokr.github.io/bc-parks-daypass/">
-            <h3>BC Parks Day-Use-Pässe 2026</h3>
-            <p>Übersicht zu den Day-Use-Pässen der BC Parks 2026.</p>
-          </a>
-          <p class="meta">
-            <span>Aktualisiert 14. Juli 2026</span>
-            <a href="https://github.com/ljuokr/bc-parks-daypass">Quellcode</a>
-          </p>
-        </li>
+        <ul>
+          <li><a href="https://ljuokr.github.io/gravel-paesse-zuerich/">Gravel-Pässe ab Zürich</a> <span>Rund 60 km und 1200 Hm ab Zürich</span></li>
+          <li><a href="https://ljuokr.github.io/indian-arm-kajak/">Indian Arm Seekajak</a> <span>Seekajak-Karte bei Vancouver</span></li>
+          <li><a href="https://ljuokr.github.io/bc-parks-daypass/">BC Parks Day-Use-Pässe</a> <span>Übersicht zu den Day-Use-Pässen 2026</span></li>
         </ul>
       </section>
-      <section class="gruppe" id="spielereien" data-gruppe>
+      <section data-gruppe>
         <h2>Spielereien</h2>
-        <p class="gruppe-text">Entstanden aus Neugier, ohne weiteren Zweck.</p>
-        <ul class="raster">
-        <li class="karte">
-          <a class="karte-link" href="https://ljuokr.github.io/kajak2/">
-            <h3>Kajak-Spiel</h3>
-            <p>Kajak-Spiel</p>
-          </a>
-          <p class="meta">
-            <span>Aktualisiert 17. April 2026</span>
-            <a href="https://github.com/ljuokr/kajak2">Quellcode</a>
-          </p>
-        </li>
+        <ul>
+          <li><a href="https://ljuokr.github.io/kajak2/">Kajak-Spiel</a> <span>Durch die Stromschnellen ohne zu kentern</span></li>
         </ul>
       </section>
-    <p class="leer" id="leer" hidden>Kein Tool passt zu dieser Suche.</p>
-  </main>
+  <p id="leer" hidden>Nichts gefunden.</p>
+</main>
 
-  <footer>
-    <p>Stand: 16. August 2026 · Quellcode aller Projekte auf <a href="https://github.com/ljuokr?tab=repositories">GitHub</a>. Die Übersicht aktualisiert sich automatisch, sobald ein Projekt dazukommt oder sich ändert.</p>
-  </footer>
-</div>
+<footer>
+  <p>Stand: 16. August 2026 · aktualisiert sich automatisch · <a href="https://github.com/ljuokr?tab=repositories">Repos</a></p>
+</footer>
 
 <script>
   const feld = document.getElementById("suche");
-  const karten = [...document.querySelectorAll(".karte")];
+  const eintraege = [...document.querySelectorAll("li")];
   const gruppen = [...document.querySelectorAll("[data-gruppe]")];
   const leer = document.getElementById("leer");
 
   feld.addEventListener("input", () => {
     const suche = feld.value.trim().toLowerCase();
-    karten.forEach((k) => {
-      k.hidden = suche !== "" && !k.textContent.toLowerCase().includes(suche);
+    eintraege.forEach((e) => {
+      e.hidden = suche !== "" && !e.textContent.toLowerCase().includes(suche);
     });
     gruppen.forEach((g) => {
-      g.hidden = ![...g.querySelectorAll(".karte")].some((k) => !k.hidden);
+      g.hidden = ![...g.querySelectorAll("li")].some((e) => !e.hidden);
     });
     leer.hidden = gruppen.some((g) => !g.hidden);
   });

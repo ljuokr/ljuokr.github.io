@@ -1,20 +1,17 @@
 {
-  "_hinweis": "Einzige Datei, die von Hand gepflegt wird. 'kategorien' bestimmt Reihenfolge und Inhalt der Abschnitte. Repos, die hier nirgends stehen, landen automatisch unter 'Neu dazugekommen'. In 'titel'/'text' stehen Overrides - fehlt ein Eintrag, holt der Generator Titel und Beschreibung selbst von der Live-Seite bzw. aus der GitHub-Beschreibung.",
+  "_hinweis": "Einzige Datei, die von Hand gepflegt wird. 'kategorien' bestimmt Reihenfolge und Inhalt der Abschnitte. Repos, die hier nirgends stehen, landen automatisch unter 'Neu dazugekommen'. In 'titel'/'text' stehen Overrides - fehlt ein Eintrag, holt der Generator Titel und Beschreibung selbst von der Live-Seite bzw. aus der GitHub-Beschreibung. Beschreibungen werden in der Liste bei rund 90 Zeichen gekürzt.",
 
   "kategorien": [
     {
       "name": "Unterricht und Lehrplan",
-      "text": "Werkzeuge rund um TTG, Lehrplan 21 und die Planung von Unterricht.",
       "repos": ["ttg-lehrplan", "planungstool-ttg", "wortwolke-designprozess", "kalender"]
     },
     {
       "name": "Gestalten und Produzieren",
-      "text": "Browser-Apps für Vektoren, Stickdaten, Laser und 3D-Druck.",
       "repos": ["vektortool", "stitchpath", "pix"]
     },
     {
       "name": "Reisen und Stadtkarten",
-      "text": "Persönliche Leaflet-Karten und Reiseunterlagen.",
       "repos": [
         "mexico-city-karte",
         "mexiko-juli-karte",
@@ -30,12 +27,10 @@
     },
     {
       "name": "Draussen unterwegs",
-      "text": "Touren, Pässe und Pässe-Logistik.",
       "repos": ["gravel-paesse-zuerich", "indian-arm-kajak", "bc-parks-daypass"]
     },
     {
       "name": "Spielereien",
-      "text": "Entstanden aus Neugier, ohne weiteren Zweck.",
       "repos": ["kajak2"]
     }
   ],
@@ -49,18 +44,43 @@
     "stitchpath": "StitchPath",
     "pix": "NeoPixel-Matrix",
     "leipzig-bericht": "Studienreise Leipzig",
-    "kajak2": "Kajak-Spiel"
+    "kajak2": "Kajak-Spiel",
+    "mexico-city-karte": "Mexico City",
+    "mexiko-juli-karte": "Mexiko im Juli",
+    "stockholm-karte": "Stockholm",
+    "stockholm-rundreise-karte": "Stockholm Rundreise",
+    "oslo-karte": "Oslo",
+    "tallinn-karte": "Tallinn",
+    "toronto-karte": "Toronto",
+    "vancouver-karte": "Vancouver",
+    "vancouver-calgary-route": "Vancouver nach Calgary",
+    "gravel-paesse-zuerich": "Gravel-Pässe ab Zürich",
+    "indian-arm-kajak": "Indian Arm Seekajak",
+    "bc-parks-daypass": "BC Parks Day-Use-Pässe"
   },
 
   "text": {
-    "leipzig-bericht": "Bericht zur Studienreise der SGL AG Design und Technik.",
-    "toronto-karte": "Persönliche Toronto-Karte (Leaflet, Single-File).",
-    "vancouver-karte": "Persönliche Vancouver-Karte (Leaflet, Single-File).",
-    "vancouver-calgary-route": "Roadtrip Vancouver nach Calgary mit Etappen und Stopps.",
-    "indian-arm-kajak": "Seekajak-Karte für den Indian Arm bei Vancouver.",
-    "bc-parks-daypass": "Übersicht zu den Day-Use-Pässen der BC Parks 2026.",
-    "stockholm-rundreise-karte": "Rundreise ab Stockholm mit Etappen und Fährverbindungen.",
-    "wortwolke-designprozess": "Begriffswolke zu den fünf Phasen des Designprozesses im TTG."
+    "ttg-lehrplan": "Kompetenzbereiche, Zyklusansicht und Querverweise",
+    "planungstool-ttg": "Modell Makroplanung für ein Unterrichtsvorhaben",
+    "wortwolke-designprozess": "Begriffe zu den fünf Phasen des Designprozesses",
+    "kalender": "Lese-Helfer für den PHBern-Raumkalender",
+    "vektortool": "Vektoreditor mit Stick-, Laser- und 3D-Ausgabe",
+    "stitchpath": "Stickdaten-Editor für DST",
+    "pix": "NeoPixel-Matrix zeichnen und umwandeln",
+    "kajak2": "Durch die Stromschnellen ohne zu kentern",
+    "mexico-city-karte": "Leaflet-Karte, Single-File",
+    "mexiko-juli-karte": "Risikozonen, Saison und Sport-Spots",
+    "stockholm-karte": "Leaflet-Karte mit Secondhand und Botanik",
+    "stockholm-rundreise-karte": "Etappen und Fährverbindungen ab Stockholm",
+    "oslo-karte": "Leaflet-Karte, Single-File",
+    "tallinn-karte": "Leaflet-Karte, Single-File",
+    "toronto-karte": "Leaflet-Karte, Single-File",
+    "vancouver-karte": "Leaflet-Karte, Single-File",
+    "vancouver-calgary-route": "Roadtrip mit Etappen und Stopps",
+    "leipzig-bericht": "Bericht der SGL AG Design und Technik",
+    "gravel-paesse-zuerich": "Rund 60 km und 1200 Hm ab Zürich",
+    "indian-arm-kajak": "Seekajak-Karte bei Vancouver",
+    "bc-parks-daypass": "Übersicht zu den Day-Use-Pässen 2026"
   },
 
   "ausgeschlossen": ["ljuokr.github.io"]

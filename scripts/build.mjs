@@ -96,180 +96,146 @@ function datum(iso) {
   });
 }
 
-function karte(t) {
-  return `        <li class="karte">
-          <a class="karte-link" href="${maskieren(t.url)}">
-            <h3>${maskieren(t.titel)}</h3>
-            ${t.text ? `<p>${maskieren(t.text)}</p>` : ""}
-          </a>
-          <p class="meta">
-            <span>Aktualisiert ${datum(t.stand)}</span>
-            <a href="https://github.com/${BENUTZER}/${maskieren(t.name)}">Quellcode</a>
-          </p>
-        </li>`;
+// Beschreibungen sind nur Beiwerk - lange Repo-Texte wuerden die Liste sprengen.
+function kuerzen(text, grenze = 90) {
+  if (text.length <= grenze) return text;
+  const schnitt = text.slice(0, grenze);
+  return schnitt.slice(0, schnitt.lastIndexOf(" ")) + " …";
+}
+
+function zeile(t) {
+  return `          <li><a href="${maskieren(t.url)}">${maskieren(t.titel)}</a>${
+    t.text ? ` <span>${maskieren(kuerzen(t.text))}</span>` : ""
+  }</li>`;
 }
 
 function abschnitt(gruppe) {
-  const id = gruppe.name
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, "-")
-    .replace(/^-|-$/g, "");
-  return `      <section class="gruppe" id="${id}" data-gruppe>
+  return `      <section data-gruppe>
         <h2>${maskieren(gruppe.name)}</h2>
-        ${gruppe.text ? `<p class="gruppe-text">${maskieren(gruppe.text)}</p>` : ""}
-        <ul class="raster">
-${gruppe.tools.map(karte).join("\n")}
+        <ul>
+${gruppe.tools.map(zeile).join("\n")}
         </ul>
       </section>`;
 }
 
-function seite(gruppen, anzahl, stand) {
+function seite(gruppen, stand) {
   return `<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tools von Lukas Jordi</title>
-<meta name="description" content="Gesammelte Browser-Werkzeuge, Karten und Unterrichtsmaterialien - alle ohne Installation direkt im Browser nutzbar.">
+<title>Tools</title>
+<meta name="robots" content="noindex">
 <meta name="color-scheme" content="light dark">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:ital,wght@0,400;0,600;0,700;1,400&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400&display=swap">
 <style>
   :root {
     --grund: #ffffff;
-    --flaeche: #f4f5f7;
-    --rand: #d8dbe0;
-    --schrift: #1a1d21;
-    --gedaempft: #55595f;
+    --rand: #e2e4e8;
+    --schrift: #22262b;
+    --gedaempft: #62666d;
     --akzent: #0b5d8f;
-    --akzent-flaeche: #e7f0f7;
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --grund: #14161a;
-      --flaeche: #1d2026;
-      --rand: #333841;
-      --schrift: #eceef1;
-      --gedaempft: #a7adb6;
-      --akzent: #7cc4f0;
-      --akzent-flaeche: #1b2b38;
+      --grund: #15171b;
+      --rand: #2c3038;
+      --schrift: #e6e8eb;
+      --gedaempft: #9ba1a9;
+      --akzent: #79c1ef;
     }
   }
   * { box-sizing: border-box; }
   body {
-    margin: 0;
-    padding: 0 1.25rem 5rem;
+    margin: 0 auto;
+    padding: 2.5rem 1.25rem 4rem;
+    max-width: 44rem;
     background: var(--grund);
     color: var(--schrift);
     font-family: "Source Sans 3", system-ui, -apple-system, sans-serif;
-    font-size: 1.0625rem;
-    line-height: 1.6;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.55;
   }
-  .huelle { max-width: 60rem; margin: 0 auto; }
-  header { padding: 3.5rem 0 1.5rem; }
-  h1 { font-size: clamp(1.9rem, 5vw, 2.6rem); line-height: 1.15; margin: 0 0 .6rem; }
-  .anriss { font-size: 1.15rem; color: var(--gedaempft); margin: 0 0 1.75rem; max-width: 44rem; }
-  .suche {
-    width: 100%;
-    max-width: 26rem;
-    padding: .65rem .9rem;
-    font: inherit;
-    color: inherit;
-    background: var(--flaeche);
-    border: 1px solid var(--rand);
-    border-radius: .5rem;
+  h1, h2 { font-weight: 400; }
+  h1 {
+    font-size: 1rem;
+    color: var(--gedaempft);
+    margin: 0 0 1.25rem;
   }
-  .suche::placeholder { color: var(--gedaempft); }
-  .gruppe { margin: 3rem 0 0; }
-  .gruppe h2 { font-size: 1.4rem; margin: 0 0 .25rem; }
-  .gruppe-text { color: var(--gedaempft); margin: 0 0 1.25rem; }
-  .raster {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 1rem;
-    grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  h2 {
+    font-size: .95rem;
+    color: var(--gedaempft);
+    margin: 2.25rem 0 .5rem;
+    padding-bottom: .3rem;
+    border-bottom: 1px solid var(--rand);
   }
-  .karte {
-    display: flex;
-    flex-direction: column;
-    background: var(--flaeche);
-    border: 1px solid var(--rand);
-    border-radius: .75rem;
-    overflow: hidden;
-  }
-  .karte-link {
-    display: block;
-    flex: 1;
-    padding: 1.1rem 1.2rem .4rem;
-    color: inherit;
-    text-decoration: none;
-  }
-  .karte-link:hover, .karte-link:focus-visible { background: var(--akzent-flaeche); }
-  .karte-link h3 {
-    margin: 0 0 .35rem;
-    font-size: 1.12rem;
+  section:first-of-type h2 { margin-top: 1.5rem; }
+  ul { list-style: none; margin: 0; padding: 0; }
+  li { padding: .22rem 0; }
+  li a {
     color: var(--akzent);
     text-decoration: underline;
     text-underline-offset: 2px;
   }
-  .karte-link p { margin: 0; color: var(--gedaempft); font-size: .97rem; line-height: 1.5; }
-  .meta {
-    display: flex;
-    flex-wrap: wrap;
-    gap: .75rem;
-    justify-content: space-between;
-    margin: 0;
-    padding: .6rem 1.2rem 1rem;
-    font-size: .85rem;
+  li span {
     color: var(--gedaempft);
+    font-size: .9rem;
   }
-  .meta a { color: var(--gedaempft); }
+  .suche {
+    width: 100%;
+    max-width: 18rem;
+    padding: .4rem .6rem;
+    font: inherit;
+    font-size: .95rem;
+    color: inherit;
+    background: transparent;
+    border: 1px solid var(--rand);
+    border-radius: .35rem;
+  }
+  .suche::placeholder { color: var(--gedaempft); }
   a:focus-visible, .suche:focus-visible {
-    outline: 3px solid var(--akzent);
+    outline: 2px solid var(--akzent);
     outline-offset: 2px;
   }
-  .leer { color: var(--gedaempft); margin: 2rem 0; }
+  #leer { color: var(--gedaempft); margin: 1.5rem 0; }
   footer {
-    margin-top: 4rem;
-    padding-top: 1.5rem;
+    margin-top: 3rem;
+    padding-top: 1rem;
     border-top: 1px solid var(--rand);
     color: var(--gedaempft);
-    font-size: .92rem;
+    font-size: .85rem;
   }
+  footer a { color: var(--gedaempft); }
   [hidden] { display: none !important; }
 </style>
 
-<div class="huelle">
-  <header>
-    <h1>Tools von Lukas Jordi</h1>
-    <p class="anriss">Kleine Werkzeuge, Karten und Unterrichtsmaterialien - alle laufen direkt im Browser, ohne Installation und ohne Konto. Die Liste erzeugt sich selbst aus meinen ${anzahl} veröffentlichten Projekten.</p>
-    <label for="suche" class="visuell-versteckt" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Tools durchsuchen</label>
-    <input id="suche" class="suche" type="search" placeholder="Tools durchsuchen …" autocomplete="off">
-  </header>
+<h1>Tools</h1>
 
-  <main>
+<label for="suche" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Suchen</label>
+<input id="suche" class="suche" type="search" placeholder="Suchen …" autocomplete="off">
+
+<main>
 ${gruppen.map(abschnitt).join("\n")}
-    <p class="leer" id="leer" hidden>Kein Tool passt zu dieser Suche.</p>
-  </main>
+  <p id="leer" hidden>Nichts gefunden.</p>
+</main>
 
-  <footer>
-    <p>Stand: ${datum(stand)} · Quellcode aller Projekte auf <a href="https://github.com/${BENUTZER}?tab=repositories">GitHub</a>. Die Übersicht aktualisiert sich automatisch, sobald ein Projekt dazukommt oder sich ändert.</p>
-  </footer>
-</div>
+<footer>
+  <p>Stand: ${datum(stand)} · aktualisiert sich automatisch · <a href="https://github.com/${BENUTZER}?tab=repositories">Repos</a></p>
+</footer>
 
 <script>
   const feld = document.getElementById("suche");
-  const karten = [...document.querySelectorAll(".karte")];
+  const eintraege = [...document.querySelectorAll("li")];
   const gruppen = [...document.querySelectorAll("[data-gruppe]")];
   const leer = document.getElementById("leer");
 
   feld.addEventListener("input", () => {
     const suche = feld.value.trim().toLowerCase();
-    karten.forEach((k) => {
-      k.hidden = suche !== "" && !k.textContent.toLowerCase().includes(suche);
+    eintraege.forEach((e) => {
+      e.hidden = suche !== "" && !e.textContent.toLowerCase().includes(suche);
     });
     gruppen.forEach((g) => {
-      g.hidden = ![...g.querySelectorAll(".karte")].some((k) => !k.hidden);
+      g.hidden = ![...g.querySelectorAll("li")].some((e) => !e.hidden);
     });
     leer.hidden = gruppen.some((g) => !g.hidden);
   });
@@ -306,7 +272,6 @@ const vergeben = new Set();
 const gruppen = KONFIG.kategorien
   .map((k) => ({
     name: k.name,
-    text: k.text,
     tools: k.repos
       .filter((n) => nachName.has(n))
       .map((n) => {
@@ -321,18 +286,14 @@ const uebrig = tools
   .sort((a, b) => b.stand.localeCompare(a.stand));
 
 if (uebrig.length > 0) {
-  gruppen.push({
-    name: "Neu dazugekommen",
-    text: "Noch keiner Kategorie zugeordnet - Zuordnung in kategorien.json ergänzen.",
-    tools: uebrig,
-  });
+  gruppen.push({ name: "Neu dazugekommen", tools: uebrig });
 }
 
 // Stand ist das neueste Push-Datum, nicht die Laufzeit - so bleibt die Ausgabe
 // bei unveraenderten Projekten byte-identisch und die Action committet nichts.
 const stand = tools.reduce((a, t) => (t.stand > a ? t.stand : a), tools[0].stand);
 
-await writeFile(new URL("../index.html", import.meta.url), seite(gruppen, tools.length, stand));
+await writeFile(new URL("../index.html", import.meta.url), seite(gruppen, stand));
 
 console.log(`${tools.length} Tools in ${gruppen.length} Kategorien geschrieben.`);
 for (const g of gruppen) console.log(`  ${g.name}: ${g.tools.map((t) => t.name).join(", ")}`);
