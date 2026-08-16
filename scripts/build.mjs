@@ -242,7 +242,7 @@ function seite(gruppen, anzahl, stand) {
 <div class="huelle">
   <header>
     <h1>Tools von Lukas Jordi</h1>
-    <p class="anriss">Kleine Werkzeuge, Karten und Unterrichtsmaterialien - alle laufen direkt im Browser, ohne Installation und ohne Konto. Die Liste erzeugt sich selbst aus meinen ${anzahl} veroeffentlichten Projekten.</p>
+    <p class="anriss">Kleine Werkzeuge, Karten und Unterrichtsmaterialien - alle laufen direkt im Browser, ohne Installation und ohne Konto. Die Liste erzeugt sich selbst aus meinen ${anzahl} veröffentlichten Projekten.</p>
     <label for="suche" class="visuell-versteckt" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)">Tools durchsuchen</label>
     <input id="suche" class="suche" type="search" placeholder="Tools durchsuchen …" autocomplete="off">
   </header>
@@ -253,7 +253,7 @@ ${gruppen.map(abschnitt).join("\n")}
   </main>
 
   <footer>
-    <p>Stand: ${datum(stand)} · Quellcode aller Projekte auf <a href="https://github.com/${BENUTZER}?tab=repositories">GitHub</a>. Die Uebersicht aktualisiert sich automatisch, sobald ein Projekt dazukommt oder sich aendert.</p>
+    <p>Stand: ${datum(stand)} · Quellcode aller Projekte auf <a href="https://github.com/${BENUTZER}?tab=repositories">GitHub</a>. Die Übersicht aktualisiert sich automatisch, sobald ein Projekt dazukommt oder sich ändert.</p>
   </footer>
 </div>
 
@@ -323,7 +323,7 @@ const uebrig = tools
 if (uebrig.length > 0) {
   gruppen.push({
     name: "Neu dazugekommen",
-    text: "Noch keiner Kategorie zugeordnet - Zuordnung in kategorien.json ergaenzen.",
+    text: "Noch keiner Kategorie zugeordnet - Zuordnung in kategorien.json ergänzen.",
     tools: uebrig,
   });
 }
