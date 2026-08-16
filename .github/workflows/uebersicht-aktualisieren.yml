@@ -1,0 +1,53 @@
+name: Übersicht aktualisieren
+
+on:
+  # Regelmässiger Durchlauf - erkennt neue Repos und geänderte Projekte von selbst.
+  schedule:
+    - cron: "*/30 * * * *"
+  # Sofort auslösbar: von Hand im Actions-Tab …
+  workflow_dispatch:
+  # … oder per API aus einem anderen Repo heraus:
+  # gh api repos/ljuokr/ljuokr.github.io/dispatches -f event_type=tool-aktualisiert
+  repository_dispatch:
+    types: [tool-aktualisiert]
+  # Bei Änderungen an Generator oder Kategorien direkt neu bauen.
+  push:
+    branches: [main]
+    paths:
+      - "scripts/build.mjs"
+      - "kategorien.json"
+      - ".github/workflows/uebersicht-aktualisieren.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: uebersicht
+  cancel-in-progress: false
+
+jobs:
+  bauen:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: index.html erzeugen
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/build.mjs
+
+      - name: Bei Änderung committen
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "Keine Änderung - nichts zu tun."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          git commit -m "Übersicht neu erzeugt: Projektstand hat sich geändert"
+          git push
