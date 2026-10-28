@@ -1,14 +1,34 @@
 {
   "_hinweis": "Einzige Datei, die von Hand gepflegt wird. 'kategorien' bestimmt Reihenfolge und Inhalt der Abschnitte. Repos, die hier nirgends stehen, landen automatisch unter 'Neu dazugekommen'. In 'titel'/'text' stehen Overrides - fehlt ein Eintrag, holt der Generator Titel und Beschreibung selbst von der Live-Seite bzw. aus der GitHub-Beschreibung. Beschreibungen werden in der Liste bei rund 90 Zeichen gekürzt.",
-
   "kategorien": [
     {
       "name": "Unterricht und Lehrplan",
-      "repos": ["ttg-lehrplan", "planungstool-ttg", "wortwolke-designprozess", "kalender"]
+      "repos": [
+        "ttg-lehrplan",
+        "planungstool-ttg",
+        "wortwolke-designprozess",
+        "kalender"
+      ]
+    },
+    {
+      "name": "Design & Technik",
+      "repos": [
+        "arduino-einfuehrung",
+        "3d-druck",
+        "keramikdruck",
+        "3d-druck-textil",
+        "lasercut",
+        "maschinensticken",
+        "sicherheit-im-ttg"
+      ]
     },
     {
       "name": "Gestalten und Produzieren",
-      "repos": ["vektortool", "stitchpath", "pix"]
+      "repos": [
+        "vektortool",
+        "stitchpath",
+        "pix"
+      ]
     },
     {
       "name": "Reisen und Stadtkarten",
@@ -27,14 +47,21 @@
     },
     {
       "name": "Draussen unterwegs",
-      "repos": ["gravel-paesse-zuerich", "indian-arm-kajak", "bc-parks-daypass"]
+      "repos": [
+        "gravel-paesse-zuerich",
+        "indian-arm-kajak",
+        "bc-parks-daypass",
+        "kajak-touren-karte",
+        "kas-kekova"
+      ]
     },
     {
       "name": "Spielereien",
-      "repos": ["kajak2"]
+      "repos": [
+        "kajak2"
+      ]
     }
   ],
-
   "titel": {
     "ttg-lehrplan": "TTG im Lehrplan 21",
     "planungstool-ttg": "Planungstool TTG",
@@ -56,9 +83,17 @@
     "vancouver-calgary-route": "Vancouver nach Calgary",
     "gravel-paesse-zuerich": "Gravel-Pässe ab Zürich",
     "indian-arm-kajak": "Indian Arm Seekajak",
-    "bc-parks-daypass": "BC Parks Day-Use-Pässe"
+    "bc-parks-daypass": "BC Parks Day-Use-Pässe",
+    "arduino-einfuehrung": "Arduino-Einführung",
+    "3d-druck": "3D-Druck",
+    "keramikdruck": "3D-Keramikdruck",
+    "3d-druck-textil": "3D-Druck auf Textilien",
+    "lasercut": "Lasercut",
+    "maschinensticken": "Maschinensticken",
+    "sicherheit-im-ttg": "Sicherheit im TTG",
+    "kajak-touren-karte": "Kajaktouren Finnland und Schweden",
+    "kas-kekova": "Kaş-Kekova Paddeltour"
   },
-
   "text": {
     "ttg-lehrplan": "Kompetenzbereiche, Zyklusansicht und Querverweise",
     "planungstool-ttg": "Modell Makroplanung für ein Unterrichtsvorhaben",
@@ -80,8 +115,18 @@
     "leipzig-bericht": "Bericht der SGL AG Design und Technik",
     "gravel-paesse-zuerich": "Rund 60 km und 1200 Hm ab Zürich",
     "indian-arm-kajak": "Seekajak-Karte bei Vancouver",
-    "bc-parks-daypass": "Übersicht zu den Day-Use-Pässen 2026"
+    "bc-parks-daypass": "Übersicht zu den Day-Use-Pässen 2026",
+    "arduino-einfuehrung": "Einstieg in Arduino für den Unterricht",
+    "3d-druck": "Einstieg in den 3D-Druck, Geräte PHBern und PHLU",
+    "keramikdruck": "3D-Keramikdruck mit dem PotterBot Micro 10",
+    "3d-druck-textil": "3D-Druck direkt auf Stoff",
+    "lasercut": "Laserschneiden, Geräte PHBern und PHLU",
+    "maschinensticken": "Bernina B 535 und B 590, Textilatelier PHLU",
+    "sicherheit-im-ttg": "Sicherheit in Fachräumen, Maschinen und Material",
+    "kajak-touren-karte": "Touren 2018 bis 2024 auf der Karte",
+    "kas-kekova": "Viertägige Paddeltour ab Kaş mit Tagesetappen"
   },
-
-  "ausgeschlossen": ["ljuokr.github.io"]
+  "ausgeschlossen": [
+    "ljuokr.github.io"
+  ]
 }
