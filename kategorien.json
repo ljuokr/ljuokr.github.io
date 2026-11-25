@@ -128,6 +128,7 @@
   },
   "ausgeschlossen": [
     "ljuokr.github.io",
-    "fachkonzept-ttg-texte"
+    "fachkonzept-ttg-texte",
+    "ttg-schemata"
   ]
 }
